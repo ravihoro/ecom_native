@@ -15,11 +15,14 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.ecom.R
 import com.example.ecom.data.User
 import com.example.ecom.databinding.FragmentRegisterBinding
+import com.example.ecom.util.RegisterValidation
 import com.example.ecom.util.Resource
 import com.example.ecom.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 private const val TAG = "RegisterFragment"
 @AndroidEntryPoint
@@ -67,6 +70,50 @@ class RegisterFragment: Fragment(R.layout.fragment_register) {
                             binding.buttonRegisterRegister.revertAnimation()
                         }
                         else -> Unit
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.validation.collect{ validation ->
+                    if(validation.firstName is RegisterValidation.Failed){
+                        withContext(Dispatchers.Main){
+                            binding.edFirstNameRegister.apply {
+                                requestFocus()
+                                error = validation.firstName.message
+                            }
+                        }
+                    }
+
+                    if(validation.lastName is RegisterValidation.Failed) {
+                        withContext(Dispatchers.Main) {
+                            binding.edLastNameRegister.apply {
+                                requestFocus()
+                                error = validation.lastName.message
+                            }
+                        }
+                    }
+
+
+                    if(validation.email is RegisterValidation.Failed){
+                        withContext(Dispatchers.Main) {
+                            binding.edEmailRegister.apply {
+                                requestFocus()
+                                error = validation.email.message
+                            }
+                        }
+                    }
+
+
+                    if(validation.password is RegisterValidation.Failed) {
+                        withContext(Dispatchers.Main) {
+                            binding.edPasswordRegister.apply {
+                                requestFocus()
+                                error = validation.password.message
+                            }
+                        }
                     }
                 }
             }
