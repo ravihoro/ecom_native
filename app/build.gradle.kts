@@ -2,15 +2,15 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
-    id("androidx.navigation.safeargs.kotlin") version "2.5.0" apply false
-    id("com.google.dagger.hilt.android") version "2.41" apply false
-    id("org.jetbrains.kotlin.kapt")
+    id("androidx.navigation.safeargs")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.example.ecom"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.ecom"
@@ -23,6 +23,10 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+    }
+
+    kapt {
+        correctErrorTypes = true
     }
 
     buildTypes {
@@ -46,11 +50,16 @@ android {
             jvmTarget = "1.8"
         }
     }
+
     buildFeatures {
         compose = true
+        viewBinding = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.0"
+    }
+    lint {
+        baseline = file("lint-baseline.xml")
     }
 //    packaging {
 //        resources {
@@ -85,9 +94,11 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha.1")
     implementation("com.shuhart.stepview:stepview:1.5.1")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
-    implementation("com.google.dagger:hilt-android:2.38.1")
-    kapt("com.google.dagger:hilt-compiler:2.38.1")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+//    implementation("com.google.dagger:hilt-android:2.44")
+//    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.51")
+    kapt("com.google.dagger:hilt-compiler:2.51")
     implementation("com.google.firebase:firebase-auth:21.0.6")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.1")
 }
