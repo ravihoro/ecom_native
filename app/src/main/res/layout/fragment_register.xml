@@ -62,7 +62,7 @@
             />
 
         <TextView
-            android:id="@+id/tvDontHaveAnAccount"
+            android:id="@+id/tvDoYouHaveAnAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/h2"
@@ -81,7 +81,7 @@
             android:layout_height="@dimen/editTextHeight"
             app:layout_constraintStart_toStartOf="@id/guidelineRegisterLeft"
             app:layout_constraintEnd_toEndOf="@id/guidelineRegisterRight"
-            app:layout_constraintTop_toBottomOf="@id/tvDontHaveAnAccount"
+            app:layout_constraintTop_toBottomOf="@id/tvDoYouHaveAnAccount"
             style="@style/editText"
             android:hint="First Name"
             android:inputType="textEmailAddress"

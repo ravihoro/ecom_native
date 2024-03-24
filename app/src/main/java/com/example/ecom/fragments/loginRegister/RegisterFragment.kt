@@ -12,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.ecom.R
 import com.example.ecom.data.User
 import com.example.ecom.databinding.FragmentRegisterBinding
@@ -41,6 +42,11 @@ class RegisterFragment: Fragment(R.layout.fragment_register) {
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.tvDoYouHaveAnAccount.setOnClickListener{
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
+
         binding.apply {
             buttonRegisterRegister.setOnClickListener{
                 val user = User(
