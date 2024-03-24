@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.compose.material3.Snackbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,8 +18,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.ecom.R
 import com.example.ecom.activities.ShoppingActivity
 import com.example.ecom.databinding.FragmentLoginBinding
+import com.example.ecom.dialog.setupBottomSheetDialog
 import com.example.ecom.util.Resource
 import com.example.ecom.viewmodel.LoginViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -47,6 +50,12 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
+        binding.tvForgotPasswordLogin.setOnClickListener{
+            setupBottomSheetDialog { email ->
+                viewModel.resetPassword(email)
+            }
+        }
+
         binding.apply {
             buttonLoginLogin.setOnClickListener{
                 val email = edEmailLogin.text.toString().trim()
@@ -54,6 +63,26 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
                 viewModel.login(email, password)
             }
         }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.resetPassword.collect {
+                    when(it) {
+                        is Resource.Error -> {
+                            Snackbar.make(requireView(), "Error: ${it.message}", Snackbar.LENGTH_LONG).show()
+                        }
+                        is Resource.Loading -> {
+
+                        }
+                        is Resource.Success -> {
+                            Snackbar.make(requireView(), "Reset link sent to email", Snackbar.LENGTH_LONG).show()
+                        }
+                        else -> Unit
+                    }
+                }
+            }
+        }
+
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
