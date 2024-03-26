@@ -96,10 +96,12 @@ dependencies {
     implementation("io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha.1")
     implementation("com.shuhart.stepview:stepview:1.5.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 //    implementation("com.google.dagger:hilt-android:2.44")
 //    kapt("com.google.dagger:hilt-android-compiler:2.44")
     implementation("com.google.dagger:hilt-android:2.51")
     kapt("com.google.dagger:hilt-compiler:2.51")
     implementation("com.google.firebase:firebase-auth:21.0.6")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.1")
+
 }
