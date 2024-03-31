@@ -10,9 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ProgressBar
+            android:id="@+id/offerProductsProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/g_blue_gray200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/rvOfferProducts"
+            app:layout_constraintBottom_toBottomOf="@id/rvOfferProducts"
+            android:visibility="gone"
+            />
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvOffer"
+        android:id="@+id/rvOfferProducts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,23 +36,33 @@
         android:id="@+id/tvBaseCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/rvOffer"
-        app:layout_constraintStart_toStartOf="@id/rvOffer"
-
+        app:layout_constraintTop_toBottomOf="@id/rvOfferProducts"
+        app:layout_constraintStart_toStartOf="@id/rvOfferProducts"
         android:layout_marginTop="10dp"
-        android:text="Best Deals"
+        android:text="Best Products"
         android:fontFamily="@font/poppins_bold"
         android:textColor="@color/black"
         />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvBestDeals"
+            android:id="@+id/rvBestProducts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tvBaseCategory"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            />
+
+        <ProgressBar
+            android:id="@+id/bestProductsProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/g_blue_gray200"
+            app:layout_constraintTop_toBottomOf="@id/rvBestProducts"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"
             />
 
 
