@@ -1,5 +1,8 @@
 package com.example.ecom.di
 
+import android.app.Application
+import android.content.Context.MODE_PRIVATE
+import com.example.ecom.util.Constants.INTRODUCTION_SP
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -18,5 +21,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFirebaseFirestoreDatabase() = FirebaseFirestore.getInstance()
+
+    @Provides
+    fun provideIntroductionSP(
+        application: Application
+    ) = application.getSharedPreferences(INTRODUCTION_SP, MODE_PRIVATE)
 
 }
