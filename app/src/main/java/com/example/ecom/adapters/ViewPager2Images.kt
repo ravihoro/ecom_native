@@ -13,7 +13,7 @@ class ViewPager2Images : RecyclerView.Adapter<ViewPager2Images.ViewPager2ImagesV
 
     inner class ViewPager2ImagesViewHolder(val binding: ViewPagerImageItemBinding) : ViewHolder(binding.root) {
         fun bind( image: String) {
-            Glide.with(itemView).load(image).into(binding.imageProductDetails)
+            Glide.with(itemView).load(image).centerCrop().into(binding.imageProductDetails)
         }
     }
 

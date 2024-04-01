@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecom.R
@@ -21,6 +22,7 @@ import com.example.ecom.adapters.BestProductsAdapter
 import com.example.ecom.adapters.SpecialProductsAdapter
 import com.example.ecom.databinding.FragmentMainCategoryBinding
 import com.example.ecom.util.Resource
+import com.example.ecom.util.showBottomNavigationView
 import com.example.ecom.viewmodel.MainCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -43,6 +45,7 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+
         binding = FragmentMainCategoryBinding.inflate(inflater)
         return binding.root
     }
@@ -54,6 +57,21 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
         setupSpecialProductsRv()
         setupBestDealsRv()
         setupBestProductsRv()
+
+        specialProductsAdapter.onClick = {
+            val b = Bundle().apply{putParcelable("product", it)}
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, b)
+        }
+
+        bestDealsAdapter.onClick = {
+            val b = Bundle().apply { putParcelable("product", it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, b)
+        }
+
+        bestProductsAdapter.onClick = {
+            val b = Bundle().apply { putParcelable("product", it)}
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, b)
+        }
 
         lifecycleScope.launch{
             repeatOnLifecycle(Lifecycle.State.STARTED){
@@ -166,6 +184,11 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = specialProductsAdapter
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigationView()
     }
 
 }
