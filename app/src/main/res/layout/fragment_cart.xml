@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+
         >
 
         <androidx.appcompat.widget.Toolbar
@@ -24,7 +24,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
 
                 <ImageView
                     android:id="@+id/imageCloseCart"
@@ -94,7 +95,9 @@
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/progressBarCart"
             app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/cart_product_item" />
+            tools:listitem="@layout/cart_product_item"
+            android:visibility="gone"
+            />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progressBarCart"
@@ -173,7 +176,7 @@
             android:id="@+id/layoutCartEmpty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
+            android:visibility="visible"
             >
 
             <ImageView
@@ -197,7 +200,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginBottom="130dp"
+                android:layout_marginTop="130dp"
                 />
 
             <TextView
@@ -214,19 +217,9 @@
 
                 />
 
-
-
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 </androidx.core.widget.NestedScrollView>
 

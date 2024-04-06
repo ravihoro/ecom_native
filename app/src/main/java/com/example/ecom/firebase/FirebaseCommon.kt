@@ -1,5 +1,6 @@
 package com.example.ecom.firebase
 
+import android.util.Log
 import com.example.ecom.data.CartProduct
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -36,8 +37,10 @@ class FirebaseCommon (
             }
 
         }.addOnSuccessListener {
+            Log.d("Success increment", "Success")
             onResult(documentId, null)
         }.addOnFailureListener {
+            Log.e("Error increment", "Errorororr ${it.message.toString()}")
             onResult(null, it)
         }
     }
