@@ -17,9 +17,11 @@ import com.example.ecom.data.Address
 import com.example.ecom.databinding.FragmentAddressBinding
 import com.example.ecom.util.Resource
 import com.example.ecom.viewmodel.AddressViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class AddressFragment: Fragment(R.layout.fragment_address) {
 
     private lateinit var binding: FragmentAddressBinding
