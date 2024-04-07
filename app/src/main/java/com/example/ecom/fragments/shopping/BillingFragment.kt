@@ -21,8 +21,8 @@ import com.example.ecom.adapters.AddressAdapter
 import com.example.ecom.adapters.BillingProductsAdapter
 import com.example.ecom.data.Address
 import com.example.ecom.data.CartProduct
-import com.example.ecom.data.Order
-import com.example.ecom.data.OrderStatus
+import com.example.ecom.data.order.Order
+import com.example.ecom.data.order.OrderStatus
 import com.example.ecom.databinding.FragmentBillingBinding
 import com.example.ecom.util.HorizontalItemDecoration
 import com.example.ecom.util.Resource

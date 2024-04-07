@@ -2,7 +2,7 @@ package com.example.ecom.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ecom.data.Order
+import com.example.ecom.data.order.Order
 import com.example.ecom.util.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
