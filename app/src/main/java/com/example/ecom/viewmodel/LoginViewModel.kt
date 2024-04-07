@@ -1,5 +1,6 @@
 package com.example.ecom.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ecom.data.User
@@ -38,13 +39,16 @@ class LoginViewModel @Inject constructor(
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
+                Log.d("login success::::::::", "${it?.user?.uid}")
                 viewModelScope.launch {
+
                     it.user?.let {
                         _login.emit(Resource.Success(it))
                     }
                 }
 
             }.addOnFailureListener{
+                Log.d("login failure ::::::::", "login failed")
                 viewModelScope.launch {
                     _login.emit(Resource.Error(it.message.toString()))
                 }
