@@ -29,6 +29,7 @@ import com.example.ecom.util.Resource
 import com.example.ecom.viewmodel.BillingViewModel
 import com.example.ecom.viewmodel.OrderViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firestore.bundle.BundleElement
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -68,6 +69,15 @@ class BillingFragment : Fragment(R.layout.fragment_billing){
 
         setupBillingProductsRv()
         setupAddressRv()
+
+        if(!args.payment) {
+            binding.apply {
+                buttonPlaceOrder.visibility = View.INVISIBLE
+                totalBoxContainer.visibility = View.INVISIBLE
+                middleLine.visibility = View.INVISIBLE
+                bottomLine.visibility = View.INVISIBLE
+            }
+        }
 
         binding.imageAddAddress.setOnClickListener{
             findNavController().navigate(R.id.action_billingFragment_to_addressFragment)
@@ -122,6 +132,10 @@ class BillingFragment : Fragment(R.layout.fragment_billing){
 
         addressAdapter.onClick = {
             selectedAddress = it
+            if(!args.payment) {
+                val bundle = Bundle().apply { putParcelable("address", selectedAddress) }
+                findNavController().navigate(R.id.action_billingFragment_to_addressFragment, bundle)
+            }
         }
 
 

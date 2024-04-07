@@ -12,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.ecom.R
 import com.example.ecom.data.Address
 import com.example.ecom.databinding.FragmentAddressBinding
@@ -27,6 +28,8 @@ class AddressFragment: Fragment(R.layout.fragment_address) {
     private lateinit var binding: FragmentAddressBinding
 
     val viewModel by viewModels<AddressViewModel>()
+
+    val args by navArgs<AddressFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,6 +79,20 @@ class AddressFragment: Fragment(R.layout.fragment_address) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val address = args.address
+        if(address == null) {
+            binding.buttonDelelte.visibility = View.GONE
+        }else{
+            binding.apply {
+                edAddressTitle.setText(address.addressTitle)
+                edFullName.setText(address.fullName)
+                edState.setText(address.state)
+                edPhone.setText(address.phone)
+                edCity.setText(address.city)
+                edStreet.setText(address.street)
+            }
+        }
+
         binding.apply {
             buttonSave.setOnClickListener{
                 val addressTitle = edAddressTitle.text.toString().trim()
@@ -90,10 +107,6 @@ class AddressFragment: Fragment(R.layout.fragment_address) {
                 viewModel.addAddress(address)
             }
         }
-
-
-
-
 
     }
 
