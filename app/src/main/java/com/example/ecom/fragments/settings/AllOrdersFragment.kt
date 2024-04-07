@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecom.R
@@ -67,6 +68,11 @@ class AllOrdersFragment: Fragment(R.layout.fragment_orders) {
                     }
                 }
             }
+        }
+
+        ordersAdapter.onClick = {
+            val action = AllOrdersFragmentDirections.actionAllOrdersFragmentToOrderDetailsFragment(it)
+            findNavController().navigate(action)
         }
 
     }
